@@ -5,6 +5,8 @@ from db import get_cases
 app = Flask(__name__)
 
 app.config["APPLICATION_ROOT"] = "/"
+
+
 @app.route("/v1/cases")
 def cases():
     # latitude
