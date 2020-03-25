@@ -12,9 +12,14 @@ app.config["APPLICATION_ROOT"] = "/"
 # TODO: instead of a timestamp passing a single UUID might be better here
 @app.route("/v1/cases")
 def cases():
+    lat = request.args.get("lat", type=float)
+    lon = request.args.get("lon", type=float)
+    if lat is None or lon is None:
+        return Response(None, status=400)
+
     try:
-        lat: int = round(request.args.get("lat", type=float))
-        lon: int = round(request.args.get("lon", type=float))
+        lat: int = round(lat)
+        lon: int = round(lon)
     except ValueError:
         return Response(None, status=400)
 

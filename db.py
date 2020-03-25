@@ -10,5 +10,7 @@ mongo = PyMongo(app)
 
 def get_cases(lat: float, lon: float, since: Optional[datetime] = None):
     if since is None:
-        return mongo.db.cases.find({lat: lat, lon: lon})
-    return mongo.db.cases.find({lat: lat, lon: lon, since: {"$gte": since}})
+        result = mongo.db.cases.find({lat: lat, lon: lon})
+    else:
+        result = mongo.db.cases.find({lat: lat, lon: lon, since: {"$gte": since}})
+    return [case for case in result]
