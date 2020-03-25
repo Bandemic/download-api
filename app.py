@@ -1,5 +1,6 @@
 from flask import Flask, escape, request, jsonify, Response
 import dateutil
+import datetime
 
 from db import get_cases
 
@@ -12,11 +13,17 @@ app.config["APPLICATION_ROOT"] = "/"
 @app.route("/v1/cases")
 def cases():
     try:
-        lat = round(float(request.args.get("lat")))
-        lon = round(float(request.args.get("lon")))
-        since = dateutil.parser.isoparse(request.args.get("since"))
+        lat: float = round(float(request.args.get("lat")))
+        lon: float = round(float(request.args.get("lon")))
     except ValueError:
         return Response(None, status=400)
 
-    cases = get_cases(lat, lon, since)
+    try:
+        # for updating an existing local list of cases
+        since: datetime = dateutil.parser.isoparse(request.args.get("since"))
+        cases = get_cases(lat, lon, since)
+    except ValueError:
+        # for querying the cases for the first time
+        cases = get_cases(lat, lon)
+
     return jsonify(cases)
