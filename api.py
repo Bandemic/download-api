@@ -4,10 +4,10 @@ from db import get_cases_by_location
 
 app = Flask(__name__)
 
-app.config['APPLICATION_ROOT'] = '/'
+app.config["APPLICATION_ROOT"] = "/"
 
 
-@app.route('/v1/cases')
+@app.route("/v1/cases")
 def cases():
     # latitude
     lat = request.args.get("lat")

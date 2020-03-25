@@ -12,9 +12,6 @@ def get_cases(lat, lon, since):
         lat = round(float(lat))
         lon = round(float(lon))
         since = dateutil.parser.isoparse(since)
-        return mongo.db.cases.find(
-            {lat: lat,
-             lon: lon,
-             since: {'$gte': since}})
+        return mongo.db.cases.find({lat: lat, lon: lon, since: {"$gte": since}})
     except ValueError:
         return None
