@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo  # type: ignore
 import dateutil.parser
 
 app = Flask(__name__)
