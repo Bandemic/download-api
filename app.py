@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config["APPLICATION_ROOT"] = "/"
 
 
+# TODO: instead of a timestamp passing a single UUID might be better here
 @app.route("/v1/cases")
 def cases():
     try:
