@@ -13,17 +13,21 @@ app.config["APPLICATION_ROOT"] = "/"
 @app.route("/v1/cases")
 def cases():
     try:
-        lat: float = round(float(request.args.get("lat")))
-        lon: float = round(float(request.args.get("lon")))
+        lat: int = round(request.args.get("lat", type=float))
+        lon: int = round(request.args.get("lon", type=float))
     except ValueError:
         return Response(None, status=400)
 
-    try:
-        # for updating an existing local list of cases
-        since: datetime = dateutil.parser.isoparse(request.args.get("since"))
-        cases = get_cases(lat, lon, since)
-    except ValueError:
+    since = request.args.get("since")
+    if since is None:
         # for querying the cases for the first time
         cases = get_cases(lat, lon)
+    else:
+        try:
+            # for updating an existing local list of cases
+            since: datetime = dateutil.parser.isoparse(since)
+            cases = get_cases(lat, lon, since)
+        except ValueError:
+            return Response(None, status=400)
 
     return jsonify(cases)
