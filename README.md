@@ -1,6 +1,10 @@
 # BanDemic Public API
 
-Public API for fetching UUID hashes of SARS-CoV-2 positive users
+Public API for fetching anonymous identifiers of SARS-CoV-2 positive users
+
+## Requirements
+
+- Python 3.8+
 
 ## Installation
 
