@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_pymongo import PyMongo  # type: ignore
-import dateutil.parser
 from datetime import datetime
 
 app = Flask(__name__)
