@@ -1,6 +1,6 @@
-from flask import Flask, escape, request, jsonify, Response
+from flask import Flask, escape, request, jsonify, Response, abort
 from datetime import datetime
-from db import mongo, get_cases
+from db import mongo, get_cases, insert_random_cases
 import dateutil.parser as dateparser
 
 from typing import Any
@@ -34,19 +34,28 @@ def cases():
         if lon is not None:
             lon = round(lon)
     except ValueError:
-        return Response(None, status=400)
+        abort(400)
 
     since: Any = request.args.get("since", type=str)
     if since is not None:
         try:
             since = dateparser.isoparse(since)
         except ValueError:
-            return Response(None, status=400)
+            abort(400)
 
     cases = get_cases(lat=lat, lon=lon, since=since)
 
     def generate():
         for case in cases:
-            yield case["uuid"] + ","
+            uuid = str(case["uuid"])
+            yield uuid + ","
 
     return Response(generate(), mimetype="application/octet-stream")
+
+
+@app.route("/v1/insert/<int:n>")
+def insert(n):
+    if not app.config["DEBUG"]:
+        abort(404)
+    insert_random_cases(n)
+    return Response("Successfully inserted %d random cases" % (n,), status=200)
