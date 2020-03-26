@@ -1,8 +1,9 @@
 from flask import Flask, escape, request, jsonify, Response
-import datetime
+from datetime import datetime
 from db import mongo, get_cases
 import dateutil.parser as dateparser
 
+from typing import Any
 import os
 
 app = Flask(__name__, instance_relative_config=True)
@@ -28,18 +29,18 @@ def cases():
 
     try:
         if lat is not None:
-            lat: int = round(lat)
+            lat = round(lat)
         if lon is not None:
-            lon: int = round(lon)
+            lon = round(lon)
     except ValueError:
         return Response(None, status=400)
 
-    since = request.args.get("since", type=str)
+    since: Any = request.args.get("since", type=str)
     if since is not None:
         try:
             since = dateparser.isoparse(since)
         except ValueError:
             return Response(None, status=400)
 
-    cases = get_cases(lat, lon=lon, since=since)
+    cases = get_cases(lat=lat, lon=lon, since=since)
     return jsonify(cases)
