@@ -25,6 +25,7 @@ mongo.init_app(app)
 def cases():
     lat = request.args.get("lat", type=float)
     lon = request.args.get("lon", type=float)
+    # TODO: use pid (latest pid that user had retrieved earlier) instead of since
     pid = request.args.get("pid", type=str)
 
     try:
