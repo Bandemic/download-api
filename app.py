@@ -44,4 +44,9 @@ def cases():
             return Response(None, status=400)
 
     cases = get_cases(lat=lat, lon=lon, since=since)
-    return jsonify(cases)
+
+    def generate():
+        for case in cases:
+            yield case["uuid"] + ","
+
+    return Response(generate(), mimetype="application/octet-stream")
