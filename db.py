@@ -30,7 +30,7 @@ def insert_random_cases(n: int):
                 "upload_timestamp": datetime.utcfromtimestamp(
                     randrange(round(time.time()))
                 ),
-                "lat": round(uniform(50, 150), 1),
-                "lon": round(uniform(50, 150), 1),
+                "lat": round(uniform(-90, 90), 1),
+                "lon": round(uniform(-180, 180), 1),
             }
         )
