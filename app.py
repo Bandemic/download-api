@@ -1,5 +1,5 @@
 from flask import Flask, escape, request, jsonify, Response
-import dateutil
+import dateutil.parser as dateparser
 import datetime
 
 from db import get_cases
@@ -14,25 +14,21 @@ app.config["APPLICATION_ROOT"] = "/"
 def cases():
     lat = request.args.get("lat", type=float)
     lon = request.args.get("lon", type=float)
-    if lat is None or lon is None:
-        return Response(None, status=400)
 
     try:
-        lat: int = round(lat)
-        lon: int = round(lon)
+        if lat is not None:
+            lat: int = round(lat)
+        if lon is not None:
+            lon: int = round(lon)
     except ValueError:
         return Response(None, status=400)
 
-    since = request.args.get("since")
-    if since is None:
-        # for querying the cases for the first time
-        cases = get_cases(lat, lon)
-    else:
+    since = request.args.get("since", type=str)
+    if since is not None:
         try:
-            # for updating an existing local list of cases
-            since: datetime = dateutil.parser.isoparse(since)
-            cases = get_cases(lat, lon, since)
+            since: datetime = dateparser.isoparse(since)
         except ValueError:
             return Response(None, status=400)
 
+    cases = get_cases(lat, lon=lon, since=since)
     return jsonify(cases)
