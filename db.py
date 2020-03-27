@@ -42,9 +42,7 @@ def insert_random_cases(n: int) -> None:
             {
                 "uuid": uuid4(),
                 "trust_level": 1,
-                "upload_timestamp": datetime.utcfromtimestamp(
-                    randrange(round(time.time()))
-                ),
+                "upload_timestamp": random_time_in_the_past(),
                 "lat": round(uniform(-90, 90), 1),
                 "lon": round(uniform(-180, 180), 1),
             }
