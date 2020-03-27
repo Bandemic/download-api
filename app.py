@@ -26,7 +26,7 @@ def cases():
     lat = request.args.get("lat", type=float)
     lon = request.args.get("lon", type=float)
     # TODO: use pid (latest pid that user had retrieved earlier) instead of since
-    pid = request.args.get("pid", type=str)
+    _pid = request.args.get("pid", type=str)
 
     try:
         if lat is not None:
@@ -58,4 +58,4 @@ def insert(n):
     if not app.config["DEBUG"]:
         abort(404)
     insert_random_cases(n)
-    return Response("Successfully inserted %d random cases" % (n,), status=200)
+    return Response("Successfully inserted {:d} random cases".format(n), status=200)
