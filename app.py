@@ -2,8 +2,8 @@ from flask import Flask, escape, request, jsonify, Response, abort
 from datetime import datetime
 from db import mongo, get_cases, insert_random_cases
 import dateutil.parser as dateparser
-
-from typing import Any
+from uuid import UUID
+from typing import Union, Optional
 import os
 
 app = Flask(__name__, instance_relative_config=True)
@@ -23,10 +23,11 @@ mongo.init_app(app)
 # TODO: instead of a timestamp passing a single UUID might be better here
 @app.route("/v1/cases")
 def cases():
-    lat = request.args.get("lat", type=float)
-    lon = request.args.get("lon", type=float)
-    # TODO: use pid (latest pid that user had retrieved earlier) instead of since
-    _pid = request.args.get("pid", type=str)
+    lat: Union[Optional[float], int] = request.args.get("lat", type=float)
+    lon: Union[Optional[float], int] = request.args.get("lon", type=float)
+    uuid: Optional[UUID] = request.args.get("uuid", type=UUID)
+    if uuid is None:
+        return Response("Please pass a uuid", status=400)
 
     try:
         if lat is not None:
@@ -36,14 +37,7 @@ def cases():
     except ValueError:
         abort(400)
 
-    since: Any = request.args.get("since", type=str)
-    if since is not None:
-        try:
-            since = dateparser.isoparse(since)
-        except ValueError:
-            abort(400)
-
-    cases = get_cases(lat=lat, lon=lon, since=since)
+    cases = get_cases(uuid, lat=lat, lon=lon)
 
     def generate():
         for case in cases:
@@ -51,6 +45,9 @@ def cases():
             yield uuid + ","
 
     return Response(generate(), mimetype="application/octet-stream")
+
+
+issubclass
 
 
 @app.route("/v1/insert/<int:n>")
