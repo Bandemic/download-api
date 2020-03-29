@@ -2,6 +2,8 @@
 
 Public API for fetching pseudonyms of users confirmed infected
 
+![Tests](https://github.com/ito-org/download-api/workflows/Build/badge.svg)
+
 ## Requirements
 
 - Python 3.8+
