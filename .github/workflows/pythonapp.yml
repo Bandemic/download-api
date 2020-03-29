@@ -50,6 +50,7 @@ jobs:
         run: poetry run mypy .
 
       - name: Test with pytest
-        run: FLASK_ENV=testing poetry run pytest
+        run: poetry run pytest
         env:
-          - mongo_uri: ${{ secrets.MongoUri }}
+          MONGO_URI: ${{ secrets.MongoUri }}
+          FLASK_ENV: testing
