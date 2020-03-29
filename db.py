@@ -7,7 +7,7 @@ from random import randrange, uniform
 import time
 from itertools import repeat
 
-mongo = PyMongo()
+db = mongo = PyMongo()
 
 
 def get_cases(
