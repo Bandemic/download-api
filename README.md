@@ -50,4 +50,4 @@ export POETRY_ENV="development"
 poetry run flask run
 ```
 
-Then browse to http://localhost:5000/v1/cases?uuid=af7af6b6-eb02-4d12-b554-f5cb089afc5d for example.
+Then browse to http://localhost:5000/v0/cases?uuid=af7af6b6-eb02-4d12-b554-f5cb089afc5d for example.
