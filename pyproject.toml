@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ito.download_api"
+name = "ito.download-api"
 version = "0.1.0"
 description = "Public API for fetching pseudonyms of users confirmed infected"
 authors = []
@@ -15,6 +15,7 @@ black = "^19.10b0"
 pytest = "^5.4.1"
 mypy = "^0.770"
 pytest-flask = "^1.0.0"
+pytest-mongodb = "^2.2.0"
 
 [build-system]
 requires = ["poetry>=0.12"]

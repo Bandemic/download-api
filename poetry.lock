@@ -129,6 +129,18 @@ version = "1.1.1"
 
 [[package]]
 category = "dev"
+description = "Fake pymongo stub for testing simple MongoDB-dependent code"
+name = "mongomock"
+optional = false
+python-versions = "*"
+version = "3.19.0"
+
+[package.dependencies]
+sentinels = "*"
+six = "*"
+
+[[package]]
+category = "dev"
 description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
 optional = false
@@ -261,6 +273,20 @@ pytest = ">=5.2"
 docs = ["sphinx", "sphinx-rtd-theme"]
 
 [[package]]
+category = "dev"
+description = "pytest plugin for MongoDB fixtures"
+name = "pytest-mongodb"
+optional = false
+python-versions = "*"
+version = "2.2.0"
+
+[package.dependencies]
+mongomock = "*"
+pymongo = "*"
+pytest = ">=2.5.2"
+pyyaml = ">=5.1"
+
+[[package]]
 category = "main"
 description = "Extensions to the standard Python datetime module"
 name = "python-dateutil"
@@ -273,11 +299,27 @@ six = ">=1.5"
 
 [[package]]
 category = "dev"
+description = "YAML parser and emitter for Python"
+name = "pyyaml"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "5.3.1"
+
+[[package]]
+category = "dev"
 description = "Alternative regular expression module, to replace re."
 name = "regex"
 optional = false
 python-versions = "*"
 version = "2020.2.20"
+
+[[package]]
+category = "dev"
+description = "Various objects to denote special meanings in python"
+name = "sentinels"
+optional = false
+python-versions = "*"
+version = "1.0.0"
 
 [[package]]
 category = "main"
@@ -332,7 +374,7 @@ dev = ["pytest", "coverage", "tox", "sphinx", "pallets-sphinx-themes", "sphinx-i
 watchdog = ["watchdog"]
 
 [metadata]
-content-hash = "0a55a950363b57f9c39b2ed3d69bb7216140dd087cef2bef8f689688537db282"
+content-hash = "7a9229ec53ecef396c14d86c79f73099b4c7d11862c8738f3ca913364888703e"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -410,6 +452,10 @@ markupsafe = [
     {file = "MarkupSafe-1.1.1-cp38-cp38-win32.whl", hash = "sha256:596510de112c685489095da617b5bcbbac7dd6384aeebeda4df6025d0256a81b"},
     {file = "MarkupSafe-1.1.1-cp38-cp38-win_amd64.whl", hash = "sha256:e8313f01ba26fbbe36c7be1966a7b7424942f670f38e666995b88d012765b9be"},
     {file = "MarkupSafe-1.1.1.tar.gz", hash = "sha256:29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b"},
+]
+mongomock = [
+    {file = "mongomock-3.19.0-py2.py3-none-any.whl", hash = "sha256:8faaffd875732bf55e38e1420a1b7212dde8d446c5852afb4c0884c1369b328b"},
+    {file = "mongomock-3.19.0.tar.gz", hash = "sha256:36aad3c6127eee9cdb52ac0186c6a60007f2412c9db715645eeccffc1258ce48"},
 ]
 more-itertools = [
     {file = "more-itertools-8.2.0.tar.gz", hash = "sha256:b1ddb932186d8a6ac451e1d95844b382f55e12686d51ca0c68b6f61f2ab7a507"},
@@ -521,9 +567,25 @@ pytest-flask = [
     {file = "pytest-flask-1.0.0.tar.gz", hash = "sha256:4d5678a045c07317618d80223ea124e21e8acc89dae109542dd1fdf6783d96c2"},
     {file = "pytest_flask-1.0.0-py3-none-any.whl", hash = "sha256:44948d3feab48c69e89b087129cc4db66bad9cb5aa472c08dfc798c69f4eac67"},
 ]
+pytest-mongodb = [
+    {file = "pytest_mongodb-2.2.0-py2.py3-none-any.whl", hash = "sha256:60c25a78ed0e8f76da91598ae191c491bc2ba419bd649015b53ab3d7b6236945"},
+]
 python-dateutil = [
     {file = "python-dateutil-2.8.1.tar.gz", hash = "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"},
     {file = "python_dateutil-2.8.1-py2.py3-none-any.whl", hash = "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"},
+]
+pyyaml = [
+    {file = "PyYAML-5.3.1-cp27-cp27m-win32.whl", hash = "sha256:74809a57b329d6cc0fdccee6318f44b9b8649961fa73144a98735b0aaf029f1f"},
+    {file = "PyYAML-5.3.1-cp27-cp27m-win_amd64.whl", hash = "sha256:240097ff019d7c70a4922b6869d8a86407758333f02203e0fc6ff79c5dcede76"},
+    {file = "PyYAML-5.3.1-cp35-cp35m-win32.whl", hash = "sha256:4f4b913ca1a7319b33cfb1369e91e50354d6f07a135f3b901aca02aa95940bd2"},
+    {file = "PyYAML-5.3.1-cp35-cp35m-win_amd64.whl", hash = "sha256:cc8955cfbfc7a115fa81d85284ee61147059a753344bc51098f3ccd69b0d7e0c"},
+    {file = "PyYAML-5.3.1-cp36-cp36m-win32.whl", hash = "sha256:7739fc0fa8205b3ee8808aea45e968bc90082c10aef6ea95e855e10abf4a37b2"},
+    {file = "PyYAML-5.3.1-cp36-cp36m-win_amd64.whl", hash = "sha256:69f00dca373f240f842b2931fb2c7e14ddbacd1397d57157a9b005a6a9942648"},
+    {file = "PyYAML-5.3.1-cp37-cp37m-win32.whl", hash = "sha256:d13155f591e6fcc1ec3b30685d50bf0711574e2c0dfffd7644babf8b5102ca1a"},
+    {file = "PyYAML-5.3.1-cp37-cp37m-win_amd64.whl", hash = "sha256:73f099454b799e05e5ab51423c7bcf361c58d3206fa7b0d555426b1f4d9a3eaf"},
+    {file = "PyYAML-5.3.1-cp38-cp38-win32.whl", hash = "sha256:06a0d7ba600ce0b2d2fe2e78453a470b5a6e000a985dd4a4e54e436cc36b0e97"},
+    {file = "PyYAML-5.3.1-cp38-cp38-win_amd64.whl", hash = "sha256:95f71d2af0ff4227885f7a6605c37fd53d3a106fcab511b8860ecca9fcf400ee"},
+    {file = "PyYAML-5.3.1.tar.gz", hash = "sha256:b8eac752c5e14d3eca0e6dd9199cd627518cb5ec06add0de9d32baeee6fe645d"},
 ]
 regex = [
     {file = "regex-2020.2.20-cp27-cp27m-win32.whl", hash = "sha256:99272d6b6a68c7ae4391908fc15f6b8c9a6c345a46b632d7fdb7ef6c883a2bbb"},
@@ -547,6 +609,9 @@ regex = [
     {file = "regex-2020.2.20-cp38-cp38-win32.whl", hash = "sha256:200539b5124bc4721247a823a47d116a7a23e62cc6695744e3eb5454a8888e6d"},
     {file = "regex-2020.2.20-cp38-cp38-win_amd64.whl", hash = "sha256:7f78f963e62a61e294adb6ff5db901b629ef78cb2a1cfce3cf4eeba80c1c67aa"},
     {file = "regex-2020.2.20.tar.gz", hash = "sha256:9e9624440d754733eddbcd4614378c18713d2d9d0dc647cf9c72f64e39671be5"},
+]
+sentinels = [
+    {file = "sentinels-1.0.0.tar.gz", hash = "sha256:7be0704d7fe1925e397e92d18669ace2f619c92b5d4eb21a89f31e026f9ff4b1"},
 ]
 six = [
     {file = "six-1.14.0-py2.py3-none-any.whl", hash = "sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c"},

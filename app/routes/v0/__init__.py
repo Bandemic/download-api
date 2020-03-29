@@ -29,8 +29,8 @@ def index():
 
     def generate():
         for case in cases:
-            uuid = str(case["uuid"])
-            yield uuid + ","
+            case_uuid = str(case["uuid"])
+            yield case_uuid + ","
 
     return Response(generate(), mimetype="application/octet-stream")
 
