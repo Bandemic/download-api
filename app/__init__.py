@@ -16,6 +16,9 @@ def create_app() -> Flask:
         app.config.from_object("config.DevelopmentConfig")
     elif env == "testing":
         app.config.from_object("config.TestingConfig")
+        mongo_uri = os.environ.get("MONGO_URI")
+        if mongo_uri is not None:
+            app.config.update({"MONGO_URI": mongo_uri})
 
     db.init_app(app)
     return app

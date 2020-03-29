@@ -2,7 +2,6 @@ class Config(object):
     APPLICATION_ROOT = "/"
     DEBUG = False
     TESTING = False
-    MONGO_URI = "mongodb://localhost:27017/ito"
 
 
 class ProductionConfig(Config):
