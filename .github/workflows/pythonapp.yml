@@ -46,5 +46,8 @@ jobs:
       - name: Check types statically
         run: poetry run mypy .
 
+      - name: Configure project
+        run: cp config.py.example config.py
+
       - name: Test with pytest
         run: poetry run pytest
