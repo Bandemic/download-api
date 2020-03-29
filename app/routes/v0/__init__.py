@@ -10,7 +10,7 @@ cases = Blueprint("v0.cases", __name__, url_prefix="/v0/cases")
 
 
 @cases.route("", methods=["GET"])
-def index():
+def index() -> Response:
     lat: Union[Optional[float], int] = request.args.get("lat", type=float)
     lon: Union[Optional[float], int] = request.args.get("lon", type=float)
     uuid: Optional[UUID] = request.args.get("uuid", type=UUID)
@@ -36,7 +36,7 @@ def index():
 
 
 @cases.route("/insert/<int:n>", methods=["POST"])
-def insert(n):
+def insert(n) -> Response:
     if not current_app.config["DEBUG"]:
         abort(404)
     insert_random_cases(n)
