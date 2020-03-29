@@ -40,14 +40,14 @@ jobs:
         run: poetry install
         if: steps.cache.outputs.cache-hit != 'true'
 
+      - name: Configure project
+        run: cp config.py.example config.py
+
       - name: Code Quality
         run: poetry run black . --check
 
       - name: Check types statically
         run: poetry run mypy .
-
-      - name: Configure project
-        run: cp config.py.example config.py
 
       - name: Test with pytest
         run: poetry run pytest
