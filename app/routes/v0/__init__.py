@@ -1,6 +1,6 @@
 from flask import Blueprint, request, Response, abort, current_app
 from uuid import UUID
-from typing import Union, Optional
+from typing import Union, Optional, Generator
 from app.persistence.db import get_cases, insert_random_cases
 from app.model import ApiError
 
@@ -26,7 +26,7 @@ def index() -> Response:
 
     cases = get_cases(uuid, lat=lat, lon=lon)
 
-    def generate():
+    def generate() -> Generator[str, None, None]:
         for case in cases:
             case_uuid = str(case["uuid"])
             yield case_uuid + ","
@@ -35,7 +35,7 @@ def index() -> Response:
 
 
 @cases.route("/insert/<int:n>", methods=["POST"])
-def insert(n) -> Response:
+def insert(n: int) -> Response:
     if not current_app.config["DEBUG"]:
         return ApiError(501, "Only available for debugging.").as_response()
     insert_random_cases(n)

@@ -4,7 +4,7 @@ import pytest  # type: ignore
 from app import create_app
 
 
-@pytest.fixture
+@pytest.fixture  # type: ignore
 def app() -> Flask:
     app = create_app()
     return app

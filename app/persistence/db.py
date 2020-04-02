@@ -7,12 +7,12 @@ from random import randrange, uniform
 import time
 from itertools import repeat
 
-db = mongo = PyMongo()
+mongo = PyMongo()
 
 
 def get_cases(
     uuid: UUID, lat: Optional[int] = None, lon: Optional[int] = None
-) -> Iterator:
+) -> Iterator[Any]:
     # TODO: prevent timing attacks that could reveal if a UUID is present or not
     conditions: Dict[str, Any] = {}
     if lat is not None:

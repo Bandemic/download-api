@@ -1,12 +1,13 @@
 import json
 from flask import Response
+from typing import Optional
 
 
 class ApiError:
     code: int
     message: str
 
-    def __init__(self, code: int = None, message: str = None):
+    def __init__(self, code: Optional[int] = None, message: Optional[str] = None):
         if code is None:
             self.code = 500
         else:

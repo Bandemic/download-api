@@ -1,5 +1,5 @@
 from flask import Flask
-from app.persistence.db import db
+from app.persistence.db import mongo
 import os
 
 from .routes.v0 import cases
@@ -19,5 +19,5 @@ def create_app() -> Flask:
         if mongo_uri is not None:
             app.config.update({"MONGO_URI": mongo_uri})
 
-    db.init_app(app)
+    mongo.init_app(app)
     return app
