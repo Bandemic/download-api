@@ -47,7 +47,7 @@ jobs:
         run: poetry run black . --check
 
       - name: Check types statically
-        run: poetry run mypy .
+        run: poetry run mypy . --strict
 
       - name: Test with pytest
         run: poetry run pytest
