@@ -19,12 +19,7 @@ def get_cases(
         conditions["lat"] = lat
     if lon is not None:
         conditions["lon"] = lon
-    last_case = mongo.db.cases.find_one({"uuid": uuid})
-    if last_case is None:
-        conditions["upload_timestamp"] = {"$gte": random_time_in_the_past()}
-    else:
-        conditions["upload_timestamp"] = {"$gte": last_case["upload_timestamp"]}
-    return (case for case in mongo.db.cases.find(conditions))
+    return list(case for case in mongo.db.cases.find(conditions, {"_id": False}))
 
 
 def random_time_in_the_past() -> datetime:

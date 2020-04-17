@@ -3,6 +3,7 @@ from uuid import UUID
 from typing import Union, Optional, Generator
 from app.persistence.db import get_cases, insert_random_cases
 from app.model import ApiError
+import json
 
 cases = Blueprint("v0.cases", __name__, url_prefix="/v0/cases")
 
@@ -26,12 +27,12 @@ def index() -> Response:
 
     cases = get_cases(uuid, lat=lat, lon=lon)
 
-    def generate() -> Generator[str, None, None]:
-        for case in cases:
-            case_uuid = str(case["uuid"])
-            yield case_uuid + ","
+    # def generate() -> Generator[str, None, None]:
+    #    for case in cases:
+    #        case_uuid = str(case["uuid"])
+    #        yield case_uuid + ","
 
-    return Response(generate(), mimetype="application/octet-stream")
+    return Response(json.dumps(cases), mimetype="application/octet-stream")
 
 
 @cases.route("/insert/<int:n>", methods=["POST"])
